@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B98450BB-5CBC-409F-ADCC-B35C88664033}|JobTrackerApp\\JobTrackerApp.csproj|c:\\personal projects\\crud-app-demo\\jobtrackerapp\\jobtrackerapp\\components\\pages\\jobtracker.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B98450BB-5CBC-409F-ADCC-B35C88664033}|JobTrackerApp\\JobTrackerApp.csproj|solutionrelative:jobtrackerapp\\components\\pages\\jobtracker.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B98450BB-5CBC-409F-ADCC-B35C88664033}|JobTrackerApp\\JobTrackerApp.csproj|c:\\personal projects\\crud-app-demo\\jobtrackerapp\\jobtrackerapp\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B98450BB-5CBC-409F-ADCC-B35C88664033}|JobTrackerApp\\JobTrackerApp.csproj|solutionrelative:jobtrackerapp\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B98450BB-5CBC-409F-ADCC-B35C88664033}|JobTrackerApp\\JobTrackerApp.csproj|c:\\personal projects\\crud-app-demo\\jobtrackerapp\\jobtrackerapp\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B98450BB-5CBC-409F-ADCC-B35C88664033}|JobTrackerApp\\JobTrackerApp.csproj|solutionrelative:jobtrackerapp\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +22,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 287,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JobTracker.razor",
+              "DocumentMoniker": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\JobTrackerApp\\Components\\Pages\\JobTracker.razor",
+              "RelativeDocumentMoniker": "JobTrackerApp\\Components\\Pages\\JobTracker.razor",
+              "ToolTip": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\JobTrackerApp\\Components\\Pages\\JobTracker.razor",
+              "RelativeToolTip": "JobTrackerApp\\Components\\Pages\\JobTracker.razor",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-18T07:24:39.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Error.razor",
+              "DocumentMoniker": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\JobTrackerApp\\Components\\Pages\\Error.razor",
+              "RelativeDocumentMoniker": "JobTrackerApp\\Components\\Pages\\Error.razor",
+              "ToolTip": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\JobTrackerApp\\Components\\Pages\\Error.razor",
+              "RelativeToolTip": "JobTrackerApp\\Components\\Pages\\Error.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-18T07:24:37.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\JobTrackerApp\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "JobTrackerApp\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Personal Projects\\CRUD-APP-DEMO\\JobTrackerApp\\JobTrackerApp\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "JobTrackerApp\\Components\\Layout\\NavMenu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-18T07:24:34.335Z",
+              "EditorCaption": ""
             }
           ]
         }
