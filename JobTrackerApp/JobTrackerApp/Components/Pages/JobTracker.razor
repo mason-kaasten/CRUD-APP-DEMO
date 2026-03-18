@@ -1,0 +1,87 @@
+﻿@page "/jobtracker"
+@rendermode InteractiveServer
+@using JobTrackerApp.Models
+@using JobTrackerApp.Services
+@using MudBlazor
+@inject JobApplicationService JobService
+@inject IDialogService DialogService
+
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <MudText Typo="Typo.h4" Class="mb-4">Job Application Tracker</MudText>
+    <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="OpenAddDialog" Class="mb-4">
+        Add Application
+    </MudButton>
+    <MudPaper Elevation="2" Class="pa-4">
+        <MudTable Items="_jobs" Hover="true" Striped="true">
+            <HeaderContent>
+                <MudTh>ID</MudTh>
+                <MudTh>Company</MudTh>
+                <MudTh>Job Title</MudTh>
+                <MudTh>Status</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.JobId</MudTd>
+                <MudTd>@context.CompanyName</MudTd>
+                <MudTd>@context.JobTitle</MudTd>
+                <MudTd>@context.Status</MudTd>
+                <MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Size="Size.Small" OnClick="() => OpenEditDialog(context)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Color="Color.Error" OnClick="() => DeleteJob(context.JobId)" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+@code {
+    private List<JobApplication> _jobs = new();
+    protected override void OnInitialized()
+    {
+        _jobs = JobService.GetAll();
+    }
+    private async Task OpenAddDialog()
+    {
+        Console.WriteLine("Button clicked!");
+
+        var parameters = new DialogParameters
+    {
+        { "Job", new JobApplication() }
+    };
+
+        var dialog = await DialogService.ShowAsync<JobDialog>("Add Application", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var job = (JobApplication)result.Data!;
+            JobService.Add(job);
+        }
+    }
+
+    private async Task OpenEditDialog(JobApplication job)
+    {
+        var jobCopy = new JobApplication
+        {
+            JobId = job.JobId,
+            CompanyName = job.CompanyName,
+            JobTitle = job.JobTitle,
+            Status = job.Status
+        };
+        var parameters = new DialogParameters
+        {
+            { "Job", jobCopy }
+        };
+        var dialog = await DialogService.ShowAsync<JobDialog>("Edit Application", parameters);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            var updatedJob = (JobApplication)result.Data!;
+            JobService.Update(updatedJob);
+        }
+    }
+    private void DeleteJob(int jobId)
+    {
+        JobService.Delete(jobId);
+    }
+}
