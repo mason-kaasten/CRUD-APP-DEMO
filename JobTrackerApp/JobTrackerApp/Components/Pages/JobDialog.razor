@@ -1,28 +1,50 @@
 ﻿@using JobTrackerApp.Models
+
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">@(Job.JobId == 0 ? "Add Application" : "Edit Application")</MudText>
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+            <MudIcon Icon="@Icons.Material.Filled.Work" Color="Color.Primary" />
+            <MudText Typo="Typo.h6" Style="font-weight:600">
+                @(Job.JobId == 0 ? "New Application" : "Edit Application")
+            </MudText>
+        </MudStack>
     </TitleContent>
     <DialogContent>
-        <MudTextField @bind-Value="Job.CompanyName" Label="Company Name" Variant="Variant.Outlined" Class="mb-3" />
-        <MudTextField @bind-Value="Job.JobTitle" Label="Job Title" Variant="Variant.Outlined" Class="mb-3" />
-        <MudSelect @bind-Value="Job.Status" Label="Status" Variant="Variant.Outlined">
-            <MudSelectItem Value="@("Applied")">Applied</MudSelectItem>
-            <MudSelectItem Value="@("Interview")">Interview</MudSelectItem>
-            <MudSelectItem Value="@("Offer")">Offer</MudSelectItem>
-            <MudSelectItem Value="@("Rejected")">Rejected</MudSelectItem>
-        </MudSelect>
+        <MudStack Spacing="3" Class="pt-2">
+            <MudTextField @bind-Value="Job.CompanyName" Label="Company Name"
+                          Variant="Variant.Outlined" Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Business"
+                          AdornmentColor="Color.Primary" />
+            <MudTextField @bind-Value="Job.JobTitle" Label="Job Title"
+                          Variant="Variant.Outlined" Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Badge"
+                          AdornmentColor="Color.Primary" />
+            <MudSelect @bind-Value="Job.Status" Label="Status" Variant="Variant.Outlined"
+                       Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Flag"
+                       AdornmentColor="Color.Primary">
+                <MudSelectItem Value="@("Applied")">Applied</MudSelectItem>
+                <MudSelectItem Value="@("Interview")">Interview</MudSelectItem>
+                <MudSelectItem Value="@("Offer")">Offer</MudSelectItem>
+                <MudSelectItem Value="@("Rejected")">Rejected</MudSelectItem>
+            </MudSelect>
+        </MudStack>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">Save</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Default"
+                   OnClick="Cancel" Size="Size.Small">Cancel</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                   OnClick="Submit" Size="Size.Small"
+                   StartIcon="@Icons.Material.Filled.Save">Save</MudButton>
     </DialogActions>
 </MudDialog>
+
 @code {
     [CascadingParameter]
     private IMudDialogInstance MudDialog { get; set; } = null!;
+
     [Parameter]
     public JobApplication Job { get; set; } = new();
+
     private void Cancel() => MudDialog.Cancel();
     private void Submit() => MudDialog.Close(DialogResult.Ok(Job));
 }

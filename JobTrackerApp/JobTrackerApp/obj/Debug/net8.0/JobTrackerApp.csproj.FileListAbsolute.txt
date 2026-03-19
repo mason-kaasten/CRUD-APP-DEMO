@@ -32,7 +32,6 @@ C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
-C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\scopedcss\bundle\JobTrackerApp.styles.css
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\scopedcss\projectbundle\JobTrackerApp.bundle.scp.css
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\staticwebassets.build.json
@@ -47,3 +46,4 @@ C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\JobTrackerApp.pdb
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\JobTrackerApp.genruntimeconfig.cache
 C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\ref\JobTrackerApp.dll
+C:\Personal Projects\CRUD-APP-DEMO\JobTrackerApp\JobTrackerApp\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css

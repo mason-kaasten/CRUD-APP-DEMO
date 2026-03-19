@@ -1,7 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@rendermode InteractiveServer
 
-<MudThemeProvider />
+<MudThemeProvider Theme="_theme" IsDarkMode="true" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -10,14 +9,27 @@
     <div class="sidebar">
         <NavMenu />
     </div>
-
     <main>
-        <div class="top-row px-4">
-            <a href="[learn.microsoft.com](https://learn.microsoft.com/aspnet/core/)" target="_blank">About</a>
+        <div class="top-row px-4" style="background-color: #1A1A2E; border-bottom: 1px solid #2d2d45;">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
-
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+
+@code {
+    private MudTheme _theme = new MudTheme()
+    {
+        PaletteDark = new PaletteDark()
+        {
+            Primary = "#7C4DFF",
+            Secondary = "#00BCD4",
+            AppbarBackground = "#1A1A2E",
+            DrawerBackground = "#1A1A2E",
+            Background = "#0F0F1A",
+            Surface = "#1E1E30",
+        }
+    };
+}

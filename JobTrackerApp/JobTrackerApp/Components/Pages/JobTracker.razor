@@ -5,15 +5,50 @@
 @using MudBlazor
 @inject JobApplicationService JobService
 @inject IDialogService DialogService
+@inject ISnackbar Snackbar
 
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
+    <MudText Typo="Typo.h5" Class="mb-4" Style="font-weight:700">Job Applications</MudText>
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
-    <MudText Typo="Typo.h4" Class="mb-4">Job Application Tracker</MudText>
-    <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="OpenAddDialog" Class="mb-4">
-        Add Application
-    </MudButton>
-    <MudPaper Elevation="2" Class="pa-4">
-        <MudTable Items="_jobs" Hover="true" Striped="true">
+    <!-- Summary Cards -->
+    <MudGrid Class="mb-4" Justify="Justify.Center">
+        <MudItem xs="6" sm="3">
+            <MudPaper Elevation="3" Class="pa-3 text-center" Style="border-top: 3px solid #7C4DFF;">
+                <MudText Typo="Typo.caption" Color="Color.Secondary">Total</MudText>
+                <MudText Typo="Typo.h5" Style="font-weight:700">@_jobs.Count</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudPaper Elevation="3" Class="pa-3 text-center" Style="border-top: 3px solid #00BCD4;">
+                <MudText Typo="Typo.caption" Color="Color.Secondary">Applied</MudText>
+                <MudText Typo="Typo.h5" Style="font-weight:700">@_jobs.Count(j => j.Status == "Applied")</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudPaper Elevation="3" Class="pa-3 text-center" Style="border-top: 3px solid #FF9800;">
+                <MudText Typo="Typo.caption" Color="Color.Secondary">Interview</MudText>
+                <MudText Typo="Typo.h5" Style="font-weight:700">@_jobs.Count(j => j.Status == "Interview")</MudText>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudPaper Elevation="3" Class="pa-3 text-center" Style="border-top: 3px solid #4CAF50;">
+                <MudText Typo="Typo.caption" Color="Color.Secondary">Offers</MudText>
+                <MudText Typo="Typo.h5" Style="font-weight:700">@_jobs.Count(j => j.Status == "Offer")</MudText>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Table -->
+    <MudPaper Elevation="3" Class="pa-4">
+        <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
+            <MudText Typo="Typo.subtitle1" Style="font-weight:600">Applications</MudText>
+            <MudButton Color="Color.Primary" Variant="Variant.Filled" Size="Size.Small"
+                       StartIcon="@Icons.Material.Filled.Add" OnClick="OpenAddDialog">
+                Add
+            </MudButton>
+        </MudStack>
+
+        <MudTable Items="_jobs" Hover="true" Striped="true" Dense="true" Elevation="0">
             <HeaderContent>
                 <MudTh>ID</MudTh>
                 <MudTh>Company</MudTh>
@@ -22,39 +57,62 @@
                 <MudTh>Actions</MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd>@context.JobId</MudTd>
-                <MudTd>@context.CompanyName</MudTd>
-                <MudTd>@context.JobTitle</MudTd>
-                <MudTd>@context.Status</MudTd>
-                <MudTd>
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Size="Size.Small" OnClick="() => OpenEditDialog(context)" />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Color="Color.Error" OnClick="() => DeleteJob(context.JobId)" />
+                <MudTd DataLabel="ID">@context.JobId</MudTd>
+                <MudTd DataLabel="Company"><strong>@context.CompanyName</strong></MudTd>
+                <MudTd DataLabel="Job Title">@context.JobTitle</MudTd>
+                <MudTd DataLabel="Status">
+                    <MudChip T="string" Color="@GetStatusColor(context.Status)" Size="Size.Small" Variant="Variant.Filled">
+                        @context.Status
+                    </MudChip>
+                </MudTd>
+                <MudTd DataLabel="Actions">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Size="Size.Small"
+                                   Color="Color.Primary" OnClick="() => OpenEditDialog(context)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small"
+                                   Color="Color.Error" OnClick="() => DeleteJob(context.JobId)" />
                 </MudTd>
             </RowTemplate>
+            <NoRecordsContent>
+                <MudText Class="pa-4" Color="Color.Secondary">No applications yet. Add one to get started!</MudText>
+            </NoRecordsContent>
         </MudTable>
     </MudPaper>
 </MudContainer>
+
 @code {
     private List<JobApplication> _jobs = new();
+
     protected override void OnInitialized()
     {
         _jobs = JobService.GetAll();
     }
-    private async Task OpenAddDialog()
+
+    private Color GetStatusColor(string status) => status switch
     {
-        var parameters = new DialogParameters
-    {
-        { "Job", new JobApplication() }
+        "Applied" => Color.Info,
+        "Interview" => Color.Warning,
+        "Offer" => Color.Success,
+        "Rejected" => Color.Error,
+        _ => Color.Default
     };
 
-        var dialog = await DialogService.ShowAsync<JobDialog>("Add Application", parameters);
+    private async Task OpenAddDialog()
+    {
+        var options = new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            CloseButton = true
+        };
+        var parameters = new DialogParameters { { "Job", new JobApplication() } };
+        var dialog = await DialogService.ShowAsync<JobDialog>("Add Application", parameters, options);
         var result = await dialog.Result;
-
         if (!result.Canceled)
         {
-            var job = (JobApplication)result.Data!;
-            JobService.Add(job);
+            JobService.Add((JobApplication)result.Data!);
             _jobs = JobService.GetAll();
+            Snackbar.Add("Application added!", Severity.Success);
         }
     }
 
@@ -67,22 +125,28 @@
             JobTitle = job.JobTitle,
             Status = job.Status
         };
-        var parameters = new DialogParameters
+        var options = new DialogOptions
         {
-            { "Job", jobCopy }
+            CloseOnEscapeKey = true,
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            CloseButton = true
         };
-        var dialog = await DialogService.ShowAsync<JobDialog>("Edit Application", parameters);
+        var parameters = new DialogParameters { { "Job", jobCopy } };
+        var dialog = await DialogService.ShowAsync<JobDialog>("Edit Application", parameters, options);
         var result = await dialog.Result;
         if (!result.Canceled)
         {
-            var updatedJob = (JobApplication)result.Data!;
-            JobService.Update(updatedJob);
+            JobService.Update((JobApplication)result.Data!);
             _jobs = JobService.GetAll();
+            Snackbar.Add("Application updated!", Severity.Info);
         }
     }
+
     private void DeleteJob(int jobId)
     {
         JobService.Delete(jobId);
         _jobs = JobService.GetAll();
+        Snackbar.Add("Application deleted.", Severity.Warning);
     }
 }
