@@ -42,8 +42,6 @@
     }
     private async Task OpenAddDialog()
     {
-        Console.WriteLine("Button clicked!");
-
         var parameters = new DialogParameters
     {
         { "Job", new JobApplication() }
@@ -56,6 +54,7 @@
         {
             var job = (JobApplication)result.Data!;
             JobService.Add(job);
+            _jobs = JobService.GetAll();
         }
     }
 
@@ -78,10 +77,12 @@
         {
             var updatedJob = (JobApplication)result.Data!;
             JobService.Update(updatedJob);
+            _jobs = JobService.GetAll();
         }
     }
     private void DeleteJob(int jobId)
     {
         JobService.Delete(jobId);
+        _jobs = JobService.GetAll();
     }
 }
